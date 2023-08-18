@@ -90,7 +90,7 @@ fun Counter() {
     }
     Column() {
         Text(text = "当前值：$number")
-        Button(onClick = { number ++ }) {
+        Button(onClick = { number++ }) {
             Text(text = "ADD")
         }
     }
