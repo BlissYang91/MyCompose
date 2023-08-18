@@ -3,6 +3,7 @@ package com.by.composeapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -120,7 +122,12 @@ fun More(title: String) {
     var expanded by rememberSaveable() {
         mutableStateOf(false)
     }
-    Column() {
+    // 动画状态
+    val extraPadding by animateDpAsState(
+        if(expanded) 48.dp else 0.dp
+    )
+
+    Column(modifier = Modifier.padding(bottom = extraPadding)) {
         Row(
             modifier = Modifier
                 .background(Color.Gray)
@@ -135,7 +142,7 @@ fun More(title: String) {
 
         }
         if (expanded) {
-            Text(text = "详情页展示。。。。。", modifier = Modifier
+            Text(text = "详情页展示。。。。。", modifier = Modifier.fillMaxSize()
                 .height(80.dp)
                 .background(Color.Yellow))
         }
