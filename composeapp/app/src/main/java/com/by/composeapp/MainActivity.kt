@@ -9,6 +9,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -61,11 +62,11 @@ class MainActivity : ComponentActivity() {
 //                    )
 
 
-//                    LazyColumn() {
-//                        items(getData()) { data ->
-//                            More(title = "$data--")
-//                        }
-//                    }
+                    LazyColumn() {
+                        items(getData()) { data ->
+                            More(title = "$data--")
+                        }
+                    }
 //
 //                    LazyRow() {
 //                        items(getData()) { data ->
@@ -73,7 +74,7 @@ class MainActivity : ComponentActivity() {
 //                        }
 //                    }
 
-                    Counter()
+//                    Counter()
 
                 }
             }
@@ -114,16 +115,26 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun More(title: String) {
-    Row(
-        modifier = Modifier
-            .background(Color.Green)
-            .padding(10.dp)
-    ) {
-        Text(text = title, fontSize = 16.sp, color = Color.Gray, modifier = Modifier.weight(1f))
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "查看详情", color = Color.White)
-        }
+    var expanded by remember {
+        mutableStateOf(false)
+    }
+    Column() {
+        Row(
+            modifier = Modifier
+                .background(Color.Gray)
+                .padding(10.dp)
+        ) {
+            Text(text = title, fontSize = 16.sp, color = Color.Blue, modifier = Modifier.weight(1f))
+            Button(onClick = {
+                expanded = !expanded
+            }) {
+                Text(text = if (!expanded) "查看详情" else "收起", color = Color.White)
+            }
 
+        }
+        if (expanded) {
+            Text(text = "详情页展示。。。。。", modifier = Modifier.height(80.dp).background(Color.Yellow))
+        }
     }
 }
 
