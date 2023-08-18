@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.by.composeapp.ui.theme.ComposeAppTheme
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,7 +116,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun More(title: String) {
-    var expanded by remember {
+    // rememberSaveable 代替remember，避免横竖屏切换UI重绘
+    var expanded by rememberSaveable() {
         mutableStateOf(false)
     }
     Column() {
@@ -133,7 +135,9 @@ fun More(title: String) {
 
         }
         if (expanded) {
-            Text(text = "详情页展示。。。。。", modifier = Modifier.height(80.dp).background(Color.Yellow))
+            Text(text = "详情页展示。。。。。", modifier = Modifier
+                .height(80.dp)
+                .background(Color.Yellow))
         }
     }
 }
