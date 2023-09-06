@@ -1,6 +1,7 @@
 package com.by.composeapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.animateDpAsState
@@ -33,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import com.by.composeapp.ui.theme.ComposeAppTheme
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,6 +120,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun More(title: String) {
+    val context = LocalContext.current
     // rememberSaveable 代替remember，避免横竖屏切换UI重绘
     var expanded by rememberSaveable() {
         mutableStateOf(false)
@@ -136,6 +139,7 @@ fun More(title: String) {
             Text(text = title, fontSize = 16.sp, color = Color.Blue, modifier = Modifier.weight(1f))
             Button(onClick = {
                 expanded = !expanded
+                Toast.makeText(context, if (!expanded) "查看详情" else "收起", Toast.LENGTH_SHORT).show()
             }) {
                 Text(text = if (!expanded) "查看详情" else "收起", color = Color.White)
             }
