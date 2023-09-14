@@ -1,6 +1,9 @@
+@file:Suppress("UNREACHABLE_CODE")
+
 package com.by.composeapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -35,6 +38,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.by.composeapp.ui.theme.ComposeAppTheme
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Timer
+import java.util.TimerTask
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +53,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     // TextField
-                    ShowTextField()
+//                    ShowTextField()
+                    time()
 //                    Greeting("Android")
 //                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //数据量很大的时候性能可能会非常低
 //                        for (i in 0 ..20) {
@@ -145,6 +154,28 @@ fun Counter() {
             Text(text = "ADD")
         }
     }
+}
+
+/**
+ * 定时器
+ */
+@Composable
+fun time() {
+    var timer : Timer? =null
+    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    timer = Timer()
+    var number by remember {
+        mutableStateOf(sdf.format(Date()))
+    }
+    LaunchedEffect(key1 = number , block = {
+        timer!!.schedule(object : TimerTask() {
+            override fun run() {
+                // 时间
+                number = sdf.format(Date())
+            }
+        }, 0, 1000)
+    })
+    Text(text = number)
 }
 
 interface MutableState<T> : State<T> {
