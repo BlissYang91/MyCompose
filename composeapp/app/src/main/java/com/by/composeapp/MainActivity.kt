@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -55,14 +57,14 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     // TextField
-//                    ShowTextField()
+                    ShowTextField()
                     time()
-//                    Greeting("Android")
-//                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //数据量很大的时候性能可能会非常低
-//                        for (i in 0 ..20) {
-//                            More(title = "Compose 测试联系第${i+1}部分，快来看吧~")
-//                        }
-//                    }
+                    Greeting("Android")
+                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //数据量很大的时候性能可能会非常低
+                        for (i in 0 ..20) {
+                            More(title = "Compose 测试联系第${i+1}部分，快来看吧~")
+                        }
+                    }
 
 //                    LazyColumn(
 //                        content = {
