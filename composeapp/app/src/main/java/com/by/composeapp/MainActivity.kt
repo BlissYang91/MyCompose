@@ -28,10 +28,12 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
@@ -59,12 +61,12 @@ class MainActivity : ComponentActivity() {
                     // TextField
                     ShowTextField()
                     time()
-                    Greeting("Android")
-                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //数据量很大的时候性能可能会非常低
-                        for (i in 0 ..20) {
-                            More(title = "Compose 测试联系第${i+1}部分，快来看吧~")
-                        }
-                    }
+//                    Greeting("Android")
+//                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //数据量很大的时候性能可能会非常低
+//                        for (i in 0 ..20) {
+//                            More(title = "Compose 测试联系第${i+1}部分，快来看吧~")
+//                        }
+//                    }
 
 //                    LazyColumn(
 //                        content = {
@@ -107,35 +109,38 @@ class MainActivity : ComponentActivity() {
 fun ShowTextField() {
     Column() {
 
-        TextField(
-            value = "",
-            onValueChange = {},
-            placeholder = {
-                Text(text = "hint text")
-            },
-            colors = TextFieldDefaults.textFieldColors(
-                placeholderColor = Color.Blue,
-                cursorColor = Color.Red,
-                textColor = Color.Yellow
-            )
-        )
+//        TextField(
+//            value = "",
+//            onValueChange = {},
+//            placeholder = {
+//                Text(text = "hint text")
+//            },
+//            colors = TextFieldDefaults.textFieldColors(
+//                placeholderColor = Color.Blue,
+//                cursorColor = Color.Red,
+//                textColor = Color.Yellow
+//            )
+//        )
 
-        Image(
-            // image 设置尺寸和圆形加载
-            modifier = Modifier
-                .width(50.dp)
-                .height(50.dp)
-                .clip(CircleShape),
-            painter = painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = "This is a example image"
-        )
+//        Image(
+//            // image 设置尺寸和圆形加载
+//            modifier = Modifier
+//                .width(50.dp)
+//                .height(50.dp)
+//                .clip(CircleShape),
+//            painter = painterResource(id = R.drawable.ic_launcher_background),
+//            contentDescription = "This is a example image"
+//        )
 
         val imageBitmap = ImageBitmap.imageResource(id = R.drawable.biying)
         Image(bitmap = imageBitmap, contentDescription = null)
 
         AsyncImage(
-            model = "https://img-blog.csdnimg.cn/20200401094829557.jpg",
+            modifier = Modifier.fillMaxSize(),
+            model = "https://c-ssl.duitang.com/uploads/blog/202105/04/20210504125140_849c0.thumb.1000_0.jpg",
             contentDescription = "this is a coil image",
+            contentScale = ContentScale.FillBounds,
+            alignment = Alignment.Center,
             placeholder = painterResource(id = R.drawable.ic_launcher_background)
         )
 
@@ -177,7 +182,7 @@ fun time() {
             }
         }, 0, 1000)
     })
-    Text(text = number)
+    Text(text = number, color = Color.Green)
 }
 
 interface MutableState<T> : State<T> {
