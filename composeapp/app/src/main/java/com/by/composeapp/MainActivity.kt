@@ -68,11 +68,11 @@ class MainActivity : ComponentActivity() {
                     ShowTextField()
                     time()
 
-                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //数据量很大的时候性能可能会非常低
-                        for (i in 0 ..20) {
-                            More(title = "Compose 测试联系第${i+1}部分，快来看吧~")
-                        }
-                    }
+//                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //数据量很大的时候性能可能会非常低
+//                        for (i in 0 ..20) {
+//                            More(title = "Compose 测试联系第${i+1}部分，快来看吧~")
+//                        }
+//                    }
 
                     LazyColumn(
                         content = {
@@ -248,7 +248,7 @@ fun More(title: String) {
             Text(
                 text = "详情页展示。。。。。", modifier = Modifier
                     .fillMaxSize()
-                    .height(80.dp)
+                    .height(40.dp)
                     .background(Color.Yellow)
             )
         }
