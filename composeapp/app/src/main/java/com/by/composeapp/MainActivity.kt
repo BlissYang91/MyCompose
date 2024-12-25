@@ -2,6 +2,7 @@
 
 package com.by.composeapp
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -16,8 +17,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -55,31 +59,33 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Color.Transparent
+//                    color = MaterialTheme.colorScheme.background
                 ) {
 
-                    // TextField
+//                    Greeting("Android")
+
                     ShowTextField()
                     time()
-//                    Greeting("Android")
-//                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //数据量很大的时候性能可能会非常低
-//                        for (i in 0 ..20) {
-//                            More(title = "Compose 测试联系第${i+1}部分，快来看吧~")
-//                        }
-//                    }
 
-//                    LazyColumn(
-//                        content = {
-//                            item {
-//                                for (i in 1..20) {
-//                                    More(title = "Compose 测试联系第${i}部分，快来看吧~")
-//                                }
-//                            }
-//                        },
-////                        modifier = Modifier.clickable(onClick = {  }, indication = null, interactionSource = remember {
-////                        MutableInteractionSource()
-////                    })
-//                    )
+                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //数据量很大的时候性能可能会非常低
+                        for (i in 0 ..20) {
+                            More(title = "Compose 测试联系第${i+1}部分，快来看吧~")
+                        }
+                    }
+
+                    LazyColumn(
+                        content = {
+                            item {
+                                for (i in 1..20) {
+                                    More(title = "Compose 测试联系第${i}部分，快来看吧~")
+                                }
+                            }
+                        },
+//                        modifier = Modifier.clickable(onClick = {  }, indication = null, interactionSource = remember {
+//                        MutableInteractionSource()
+//                    })
+                    )
 
 
 //                    LazyColumn() {
@@ -87,7 +93,7 @@ class MainActivity : ComponentActivity() {
 //                            More(title = "$data--")
 //                        }
 //                    }
-
+//
 //                    LazyRow() {
 //                        items(getData()) { data ->
 //                            More(title = "$data--")
@@ -147,6 +153,15 @@ fun ShowTextField() {
 
     }
 
+}
+
+@Composable
+fun ShowImage() {
+    Column {
+        SelectionContainer {
+
+        }
+    }
 }
 
 
@@ -216,7 +231,7 @@ fun More(title: String) {
     Column(modifier = Modifier.padding(bottom = extraPadding)) {
         Row(
             modifier = Modifier
-                .background(Color.Gray)
+                .background(Color.Transparent)
                 .padding(10.dp)
         ) {
             Text(text = title, fontSize = 16.sp, color = Color.Blue, modifier = Modifier.weight(1f))
